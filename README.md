@@ -1,4 +1,4 @@
-# Alisha Rao — Webtoon Portfolio
+# Alisha Rao : Webtoon Portfolio
 
 A responsive, single-page portfolio told as a dark, vertical-scroll webtoon. Built with plain HTML, CSS, and JavaScript; GSAP and ScrollTrigger are loaded from cdnjs.
 
