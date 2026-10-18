@@ -7,7 +7,7 @@ A personal portfolio designed like a manhwa (webtoon) you scroll through. Every 
 <<<<<<< HEAD
 ## About me
 
-I am a third-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I work with Python, SQL, machine learning and statistics, and I like turning messy data into dashboards and models people can actually use.
+I am a fifth-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I work with Python, SQL, machine learning and statistics, and I like turning messy data into dashboards and models people can actually use.
 
 ## Features
 
@@ -15,9 +15,11 @@ I am a third-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumb
 - Dark mode by default, with a dark/light toggle
 - Hero with animated name letters and floating cutout icons
 - Animated CGPA counter and grouped skill badges
+- Twin animated skills marquees, with reduced-motion support
 - Project chapters with generated SVG covers
 - "Side stories" section for hobbies and interests
 - Click bursts (POW, BAM), custom cursor, and a page counter that tracks scroll progress
+- Fixed top progress bar and chapter navigation rail for desktop
 - A hidden bonus chapter. Find the way in and see what happens.
 - Fully responsive, tested on phones
 
