@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101014" />
+    <meta name="description" content="Alisha Rao — Data Science portfolio featuring analytics dashboards, statistical modeling, and portfolio rebalancing." />
+    <title>Alisha Rao — Data Science, With a Plot Twist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      document.documentElement.dataset.theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <div class="loader" aria-label="Loading portfolio">
+      <div class="loader-card">
+        <span class="loader-chapter">A NEW STORY</span>
+        <span class="loader-title">CHAPTER<br />ONE</span>
+        <span class="loader-rule"></span>
+        <span class="loader-status">TURNING THE PAGE<span class="loader-dots">...</span></span>
+      </div>
+    </div>
+
+    <div class="scroll-progress" aria-live="polite">
+      <span class="progress-line"><i></i></span>
+      <span class="page-counter">Page <b>01</b> / <span class="page-counter-total">11</span></span>
+    </div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="sound-effect" aria-hidden="true">WHOOSH</div>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.8 15.2A8.7 8.7 0 0 1 8.8 4.2 8.8 8.8 0 1 0 19.8 15.2Z" /></svg>
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 1.5v3M12 19.5v3M1.5 12h3m15 0h3M4.6 4.6l2.1 2.1m10.6 10.6 2.1 2.1m0-14.8-2.1 2.1M6.7 17.3l-2.1 2.1" /></svg>
+    </button>
+    <section class="easter-egg" id="secret-chapter" role="dialog" aria-modal="true" aria-labelledby="secret-title" aria-describedby="manga-transcript" hidden>
+      <button class="easter-close" type="button" aria-label="Close bonus chapter">×</button>
+      <div class="easter-panel">
+        <div class="easter-confetti" aria-hidden="true"></div>
+        <article class="manga-page" aria-labelledby="secret-title">
+          <header class="manga-header">
+            <span class="easter-kicker" data-manga-text="kicker"></span>
+            <h2 id="secret-title" data-manga-text="title"></h2>
+          </header>
+          <svg class="manga-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <g id="manga-student">
+                <path d="M-39 4Q-45-38-14-43L20-39Q45-24 37 8L27 5Q25-18 2-20Q-12-6-36 0Z" fill="#292234"/>
+                <circle cx="0" cy="0" r="31" fill="#f2c6a6" stroke="#17171c" stroke-width="3"/>
+                <path d="M-14 1h4m19 0h4" stroke="#17171c" stroke-width="4" stroke-linecap="round"/>
+                <path class="student-mouth" d="M-7 14q7 6 14 0" fill="none" stroke="#8d4555" stroke-width="3" stroke-linecap="round"/>
+                <path d="M-43 84Q-40 39-20 32H20Q42 43 45 84Z" fill="#7655a5" stroke="#17171c" stroke-width="3"/>
+                <path d="M-12 34v13l12 9 12-9V34" fill="#f5f0e8" stroke="#17171c" stroke-width="2"/>
+              </g>
+              <g id="manga-professor">
+                <path d="M-34-8Q-42-36-17-43Q7-54 33-32L38-7Q18-23 0-25Q-18-19-34-8Z" fill="#f5f0e8" stroke="#17171c" stroke-width="3"/>
+                <circle cx="0" cy="0" r="30" fill="#efc7a8" stroke="#17171c" stroke-width="3"/>
+                <path d="M-24-2h18m12 0h18M-6-2h12" fill="none" stroke="#17171c" stroke-width="3"/>
+                <circle cx="-14" cy="0" r="9" fill="none" stroke="#17171c" stroke-width="3"/>
+                <circle cx="14" cy="0" r="9" fill="none" stroke="#17171c" stroke-width="3"/>
+                <path d="M-10 18q10-5 20 0Q6 33 0 30Q-7 31-10 18Z" fill="#f5f0e8" stroke="#17171c" stroke-width="2"/>
+                <path d="M-42 84Q-39 39-18 32H18Q40 41 43 84Z" fill="#fffaf0" stroke="#17171c" stroke-width="3"/>
+                <path d="M-12 34v18L0 65l12-13V34" fill="#c7dbe5" stroke="#17171c" stroke-width="2"/>
+              </g>
+              <g id="manga-laptop">
+                <path d="M-46-32Q-46-38-39-38H39Q46-38 46-32V23H-46Z" fill="#252a3c" stroke="#17171c" stroke-width="3"/>
+                <rect x="-38" y="-31" width="76" height="47" rx="2" fill="#a9e7f0"/>
+                <path d="M-54 27H54L45 36H-45Z" fill="#d7d8e5" stroke="#17171c" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+              <g id="manga-clipboard">
+                <rect x="-23" y="-32" width="46" height="64" rx="3" fill="#fffaf0" stroke="#17171c" stroke-width="3"/>
+                <rect x="-10" y="-37" width="20" height="10" rx="3" fill="#c7dbe5" stroke="#17171c" stroke-width="2"/>
+                <path d="M-13-12h26M-13 0h26M-13 12h19" stroke="#62758b" stroke-width="3"/>
+              </g>
+            </defs>
+          </svg>
+          <div class="manga-row-label" data-manga-text="theoryLabel"></div>
+          <div class="manga-grid">
+            <section class="manga-panel manga-theory" data-manga-panel="1" aria-label="In theory, panel one">
+              <svg class="manga-art" viewBox="0 0 400 180" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Student and professor beside a laptop">
+                <g transform="translate(90 44) scale(.85)"><use href="#manga-student" class="student-calm"/></g>
+                <g transform="translate(310 55) scale(.85)"><use href="#manga-professor"/><path class="manga-professor-smile" d="M-9 18q9 8 18 0"/></g>
+                <use href="#manga-laptop" transform="translate(200 137) scale(.85)"/>
+              </svg>
+              <div class="manga-dialogues"><p class="manga-bubble" data-manga-text="p1Student"></p><p class="manga-bubble" data-manga-text="p1Professor"></p></div>
+              <span class="manga-panel-sfx" data-manga-text="openingSfx" aria-hidden="true"></span>
+            </section>
+            <section class="manga-panel manga-theory" data-manga-panel="2" aria-label="In theory, panel two">
+              <svg class="manga-art" viewBox="0 0 400 180" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Professor raises one finger while the student listens">
+                <g transform="translate(95 44) scale(.85)"><use href="#manga-student" class="student-calm"/></g>
+                <g transform="translate(300 55) scale(.85)"><use href="#manga-professor" class="professor-finger"/><path class="manga-raised-finger" d="M15 45q16-19 22-42q2-9 7-6q5 2 1 15l-4 15q14-3 19 1q5 4-1 11q-3 20-23 27Z"/></g>
+                <use href="#manga-clipboard" transform="translate(350 137) scale(.85)"/>
+              </svg>
+              <p class="manga-bubble" data-manga-text="p2Professor"></p>
+            </section>
+          </div>
+          <div class="manga-row-label manga-row-label-right" data-manga-text="realityLabel"></div>
+          <div class="manga-grid">
+            <section class="manga-panel manga-reality" data-manga-panel="3" aria-label="In reality, panel three">
+              <svg class="manga-art" viewBox="0 0 400 180" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Exhausted student celebrates wildly beside a laptop">
+                <g transform="translate(92 44) scale(.85)"><use href="#manga-student" class="student-excited"/><path class="manga-excited-eyes" d="M-21-3q7-10 14 0m9 0q7-10 14 0"/><path class="student-dark-circles" d="M-16 6q7 5 14 0m9 0q7 5 14 0"/></g>
+                <g transform="translate(310 55) scale(.85)"><use href="#manga-professor" class="professor-prayer"/><path class="manga-prayer-hands" d="M-15 49l15 16 15-16"/></g>
+                <use href="#manga-laptop" transform="translate(200 137) scale(.85)"/>
+                <text class="manga-screen-copy" data-manga-text="accuracyInitial" text-anchor="middle" transform="translate(200 137) scale(.85)"></text>
+              </svg>
+              <div class="manga-dialogues"><p class="manga-bubble" data-manga-text="p3Student"></p><p class="manga-bubble" data-manga-text="p3Professor"></p></div>
+            </section>
+            <section class="manga-panel manga-reality" data-manga-panel="4" aria-label="In reality, panel four">
+              <svg class="manga-art" viewBox="0 0 400 180" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Professor whispers as the student stares at the laptop with a sweat drop">
+                <g transform="translate(90 55) scale(.85)"><use href="#manga-professor" class="professor-whisper"/></g>
+                <g transform="translate(310 44) scale(.85)"><use href="#manga-student" class="student-tired"/><path class="manga-sweat" d="M35-64Q22-44 35-38Q48-44 35-64Z"/><path class="student-dark-circles" d="M-16 3q6 5 12 0m12 0q6 5 12 0"/><path class="manga-tired-face" d="M-15-2l7 4m20-4l-7 4m-5 16q6-4 12 0"/></g>
+                <use href="#manga-laptop" transform="translate(200 137) scale(.85)"/>
+              </svg>
+              <p class="manga-bubble" data-manga-text="p4Professor"></p>
+            </section>
+          </div>
+          <section class="manga-ending" data-manga-panel="5" aria-label="Mystery ending">
+            <svg class="manga-art manga-ending-art" viewBox="0 0 900 300" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A laptop shows a lower accuracy as a shadowy figure with glowing eyes appears in the window">
+              <rect x="0" y="0" width="900" height="300" fill="#131729"/>
+              <path d="M0 270H900" stroke="#53628b" stroke-width="3"/>
+              <rect x="616" y="105" width="230" height="140" fill="#283758" stroke="#91b8dc" stroke-width="5"/>
+              <path d="M731 106v138M618 175h226" stroke="#91b8dc" stroke-width="4"/>
+              <path class="manga-shadow-figure" d="M707 245Q704 191 718 166Q739 143 761 168Q777 197 773 245Z" fill="#090b16"/>
+              <circle class="manga-shadow-eyes" cx="731" cy="179" r="5" fill="#a7f4ff"/>
+              <circle class="manga-shadow-eyes" cx="750" cy="179" r="5" fill="#a7f4ff"/>
+              <g transform="translate(150 58) scale(.85)"><use href="#manga-student" class="student-tired"/></g>
+              <use href="#manga-laptop" transform="translate(450 230) scale(.85)"/>
+              <text class="manga-screen-copy manga-glitch" data-manga-text="accuracyFinal" text-anchor="middle" transform="translate(450 230) scale(.85)"></text>
+            </svg>
+            <span class="manga-caption" data-manga-text="endingCaption"></span>
+            <p class="manga-bubble manga-ending-bubble" data-manga-text="endingStudent"></p>
+            <p class="manga-ending-footer" data-manga-text="endingFooter"></p>
+            <span class="manga-sfx" data-manga-text="endingSfx" aria-hidden="true"></span>
+          </section>
+          <div class="manga-transcript visually-hidden" id="manga-transcript"></div>
+          <button class="manga-replay" type="button" data-manga-text="replay"></button>
+        </article>
+      </div>
+    </section>
+
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Alisha Rao home">AR<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#projects">Chapters</a><a href="#interests">Side stories</a><a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="chapter hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-halftone" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="chapter-kicker"><span class="chapter-number">CHAPTER 1</span><span class="kicker-line"></span> THE PROTAGONIST ARRIVES</p>
+          <h1 id="hero-title" class="display-title" data-split aria-label="ALISHA">ALISHA</h1>
+          <span class="hero-wham" aria-hidden="true">WHAM!</span>
+          <p class="hero-tagline">Data science, with a plot twist.</p>
+          <p class="hero-description">Third-year data science student.<br />Collector of questions with inconveniently interesting answers.</p>
+          <a class="comic-button" href="#about">Start reading <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-cutouts" aria-label="A few things Alisha enjoys">
+          <img class="cutout cutout-racket" src="assets/cutouts/badminton-racket.png" alt="Placeholder illustration of a badminton racket" fetchpriority="high" />
+          <img class="cutout cutout-shuttle" src="assets/cutouts/shuttlecock.png" alt="Placeholder illustration of a shuttlecock" fetchpriority="high" />
+          <img class="cutout cutout-headphones" src="assets/cutouts/headphones.png" alt="Placeholder illustration of headphones" fetchpriority="high" />
+          <img class="cutout cutout-manhwa" src="assets/cutouts/manhwa-volume.png" alt="Placeholder illustration of a manhwa volume" fetchpriority="high" />
+          <img class="cutout cutout-camera" src="assets/cutouts/camera.png" alt="Placeholder illustration of a camera" fetchpriority="high" />
+          <img class="cutout cutout-food" src="assets/cutouts/food.png" alt="Placeholder illustration of a plate of food" fetchpriority="high" />
+        </div>
+        <span class="hero-sfx" aria-hidden="true">FWIP!</span>
+        <div class="hero-footer"><span>SCROLL TO CONTINUE</span><span>01 — <span class="hero-page-total">11</span></span></div>
+      </section>
+
+      <section class="chapter about chapter-pad" id="about" aria-labelledby="about-title">
+        <div class="chapter-heading">
+          <p class="chapter-kicker"><span class="chapter-number">CHAPTER 2</span><span class="kicker-line"></span> CHARACTER PROFILE</p>
+          <h2 class="section-title" id="about-title">A LITTLE <span>BACKSTORY</span></h2>
+        </div>
+        <div class="about-panel comic-panel">
+          <div class="about-image-wrap">
+            <img class="about-image" src="assets/alisha.jpg" alt="Placeholder portrait of Alisha Rao" loading="lazy" />
+            <span class="image-caption">PROTAGONIST · MUMBAI, IN</span>
+            <span class="image-panel-number">02—A</span>
+          </div>
+          <div class="about-story">
+            <span class="panel-label">MEANWHILE, AT UNIVERSITY...</span>
+            <div class="speech-bubble">
+              <p>Third-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I like turning data into things people can actually use.</p>
+              <span class="bubble-tail" aria-hidden="true"></span>
+            </div>
+            <div class="cgpa-card">
+              <span class="cgpa-label">CURRENT ACADEMIC POWER LEVEL</span>
+              <strong><span data-counter data-target="3.97" data-decimals="2">0.00</span><small> / 4.00</small></strong>
+              <span class="cgpa-note">CGPA · THE GRIND HAS LORE</span>
+            </div>
+          </div>
+        </div>
+        <div class="powerups">
+          <div class="powerup-heading"><span>POWER-UPS UNLOCKED</span><span>SKILL TREE · <span data-skill-count>27</span></span></div>
+          <div class="skill-groups"></div>
+        </div>
+        <span class="transition-sfx" aria-hidden="true">CLICK</span>
+      </section>
+
+      <section class="chapter project-chapter chapter-pad" id="projects" aria-labelledby="projects-title">
+        <div class="chapter-heading">
+          <p class="chapter-kicker"><span class="chapter-number" data-project-chapter-range>CHAPTERS 03—06</span><span class="kicker-line"></span> <span data-project-chapter-summary>FOUR PROJECTS, ZERO SKIPPED CUTSCENES</span></p>
+          <h2 class="section-title" id="projects-title">THE PLOT <span>THICKENS</span></h2>
+        </div>
+        <div class="project-stack"></div>
+        <span class="transition-sfx projects-sfx" aria-hidden="true">POW!</span>
+      </section>
+
+      <section class="chapter interests chapter-pad" id="interests" aria-labelledby="interests-title">
+        <div class="chapter-heading">
+          <p class="chapter-kicker"><span class="chapter-number">SIDE STORIES</span><span class="kicker-line"></span> OPTIONAL QUESTS (NOT REALLY OPTIONAL)</p>
+          <h2 class="section-title" id="interests-title">OFF-DUTY <span>LORE</span></h2>
+        </div>
+        <div class="interest-grid">
+          <article class="interest-card"><div class="interest-inner"><div class="interest-front interest-badminton"><span class="interest-number">S—01</span><span class="interest-art">RALLY<br />POINT</span><h3>Badminton</h3><span class="flip-hint">HOVER TO REVEAL</span></div><div class="interest-back"><span>01 / THE COURT</span><p>Footwork: improving. Post-game analysis: elite.</p></div></div></article>
+          <article class="interest-card"><div class="interest-inner"><div class="interest-front interest-cinema"><span class="interest-number">S—02</span><span class="interest-art">ROLL<br />CREDITS</span><h3>Movies &amp; series</h3><span class="flip-hint">HOVER TO REVEAL</span></div><div class="interest-back"><span>02 / THE WATCHLIST</span><p>Romcoms for the heart. Mystery thrillers for the overthinking.</p></div></div></article>
+          <article class="interest-card"><div class="interest-inner"><div class="interest-front interest-manhwa"><span class="interest-number">S—03</span><span class="interest-art">ONE<br />MORE CHAPTER</span><h3>Manhwa &amp; anime</h3><span class="flip-hint">HOVER TO REVEAL</span></div><div class="interest-back"><span>03 / THE CLIFFHANGER</span><p>Manhwa, with the occasional anime. Sleep schedule not included.</p></div></div></article>
+          <article class="interest-card"><div class="interest-inner"><div class="interest-front interest-food"><span class="interest-number">S—04</span><span class="interest-art">SIDE<br />DISH</span><h3>Food</h3><span class="flip-hint">HOVER TO REVEAL</span></div><div class="interest-back"><span>04 / THE FOOD ARC</span><p>Will travel for a good meal. Will also take notes.</p></div></div></article>
+          <article class="interest-card"><div class="interest-inner"><div class="interest-front interest-travel"><span class="interest-number">S—05</span><span class="interest-art">FAMILY<br />ROUTE</span><h3>Travel with family</h3><span class="flip-hint">HOVER TO REVEAL</span></div><div class="interest-back"><span>05 / THE GROUP QUEST</span><p>Best stories happen when everybody agrees on the directions. Eventually.</p></div></div></article>
+        </div>
+      </section>
+
+      <section class="chapter contact chapter-pad" id="contact" aria-labelledby="contact-title">
+        <div class="contact-halftone" aria-hidden="true"></div>
+        <div class="chapter-heading">
+          <p class="chapter-kicker"><span class="chapter-number">FINAL CHAPTER</span><span class="kicker-line"></span> ENDING? UNLIKELY.</p>
+          <h2 class="section-title" id="contact-title">LET'S MAKE <span>IT A STORY</span></h2>
+        </div>
+        <div class="contact-panel comic-panel">
+          <span class="contact-asterisk" aria-hidden="true">!!</span>
+          <div class="contact-bubble"><p>Let's make something together.</p><span class="bubble-tail" aria-hidden="true"></span></div>
+          <div class="contact-details"><p>Have a good idea, an interesting question, or an excellent series recommendation? My inbox is open.</p><a href="mailto:alisha.s.rao@gmail.com">alisha.s.rao@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/alisharao18" target="_blank" rel="noreferrer">github.com/alisharao18 <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <p class="to-be-continued">TO BE CONTINUED<span>...</span></p>
+        <section class="bonus-chapter comic-panel" aria-labelledby="bonus-title">
+          <div class="bonus-heading">
+            <div>
+              <p class="bonus-kicker">BONUS CHAPTER · SEALED</p>
+              <h2 id="bonus-title">The bonus chapter</h2>
+            </div>
+            <svg class="bonus-lock" viewBox="0 0 32 36" role="img" aria-label="Locked padlock">
+              <path class="bonus-lock-shackle" d="M8 15V10a8 8 0 0 1 16 0v7" />
+              <rect x="4" y="15" width="24" height="18" rx="2" />
+              <circle cx="16" cy="23" r="2" />
+              <path d="M16 25v3" />
+            </svg>
+          </div>
+          <p class="bonus-instructions">Put the evidence in order to open what comes next.</p>
+          <p class="bonus-clue">Every story has one. Mine is hiding in my tagline.</p>
+          <div class="bonus-puzzle">
+            <div class="bonus-tile-rack" role="group" aria-label="Scrambled letter tiles" aria-live="polite" aria-relevant="additions text"></div>
+            <div class="bonus-slots" role="group" aria-label="Word slots" aria-live="polite" aria-relevant="additions text"></div>
+          </div>
+          <p class="bonus-status" aria-live="polite" aria-atomic="true"></p>
+          <button class="bonus-hint" type="button" hidden>Need a hint?</button>
+        </section>
+        <footer class="site-footer"><a class="brand" href="#home">AR<span>.</span></a><span>AN ORIGINAL STORY BY ALISHA RAO</span><span class="secret-hint">psst... try typing the plot twist</span><span>© <span id="year"></span></span></footer>
+      </section>
+    </main>
+  </body>
+</html>
