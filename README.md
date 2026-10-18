@@ -4,10 +4,6 @@
 
 A personal portfolio designed like a manhwa (webtoon) you scroll through. Every section is a chapter, projects are comic panels, and there is one secret chapter for curious visitors.
 
-> Data science, with a plot twist.
-
-![Portfolio preview](assets/preview.png)
-
 ## About me
 
 I am a third-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I work with Python, SQL, machine learning and statistics, and I like turning messy data into dashboards and models people can actually use.
