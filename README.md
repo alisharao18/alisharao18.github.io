@@ -4,7 +4,6 @@
 
 A personal portfolio designed like a manhwa (webtoon) you scroll through. Every section is a chapter, projects are comic panels, and there is one secret chapter for curious visitors.
 
-<<<<<<< HEAD
 ## About me
 
 I am a fifth-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I work with Python, SQL, machine learning and statistics, and I like turning messy data into dashboards and models people can actually use.
@@ -26,7 +25,6 @@ I am a fifth-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumb
 
 ## Built with
 
->>>>>>> 5fdbb0b (Update README with live link)
 - HTML, CSS and vanilla JavaScript (no frameworks, no build step)
 - [GSAP](https://gsap.com/) and ScrollTrigger for animation
 - Google Fonts (Anton, Inter)
@@ -73,8 +71,4 @@ Hosted for free on GitHub Pages from the `main` branch (root folder). Every push
 
 ## License
 
-<<<<<<< HEAD
 Code is free to read and learn from. Please do not copy the design or content as your own portfolio.
-=======
-Code is free to read and learn from. Please do not copy the design or content as your own portfolio.
->>>>>>> 5fdbb0b (Update README with live link)

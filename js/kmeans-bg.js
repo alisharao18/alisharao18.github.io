@@ -1,12 +1,12 @@
 const KMEANS_BACKGROUND_CONFIG = Object.freeze({
-  desktopDotCount: 260,
-  smallDeviceDotCount: 90,
+  desktopDotCount: 120,
+  smallDeviceDotCount: 60,
   smallDeviceBreakpoint: 600,
   initialK: 4,
   minK: 2,
   maxK: 6,
   clusterColors: ["--red", "--violet", "--yellow", "--cyan"],
-  maxDpr: 2,
+  maxDpr: 1.5,
   dotRadius: 1.35,
   dotGlowRadius: 3.8,
   darkDotOpacity: 0.34,
@@ -79,6 +79,7 @@ const KMEANS_BACKGROUND_CONFIG = Object.freeze({
   let reducedTheme = document.documentElement.dataset.theme === "light";
   let pointerMagnetEnabled = desktopPointer.matches;
   let themeColors = colors.slice();
+  let introFinished = !document.querySelector(".book-intro-overlay");
 
   if (hud) {
     hud.className = "kmeans-hud";
@@ -402,7 +403,7 @@ const KMEANS_BACKGROUND_CONFIG = Object.freeze({
 
   function frame(time) {
     animationFrame = 0;
-    if (document.hidden) return;
+    if (document.hidden || !introFinished) return;
     const elapsed = previousTime ? time - previousTime : 16.67;
     previousTime = time;
 
@@ -463,12 +464,14 @@ const KMEANS_BACKGROUND_CONFIG = Object.freeze({
   }
 
   function handlePageClick(event) {
+    if (!introFinished) return;
     if (!(event.target instanceof Element)) return;
     if (event.target.closest("a, button, input, select, textarea, [role='button'], [contenteditable='true'], #secret-chapter")) return;
     triggerShockwave(event.clientX, event.clientY);
   }
 
   function handleKeydown(event) {
+    if (!introFinished) return;
     if (event.repeat || event.key.toLowerCase() !== "k") return;
     if (event.target instanceof Element && event.target.closest("a, button, input, select, textarea, [contenteditable='true']")) return;
     const x = pointer.active ? pointer.x : width * 0.5;
@@ -484,7 +487,7 @@ const KMEANS_BACKGROUND_CONFIG = Object.freeze({
   }
 
   function startAnimation() {
-    if (reducedMotion || document.hidden || animationFrame) return;
+    if (reducedMotion || document.hidden || !introFinished || animationFrame) return;
     previousTime = 0;
     animationFrame = window.requestAnimationFrame(frame);
   }
@@ -509,6 +512,11 @@ const KMEANS_BACKGROUND_CONFIG = Object.freeze({
     setThemeColors();
     if (reducedMotion) drawFrame();
   }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  document.addEventListener("portfoliointrofinished", () => {
+    introFinished = true;
+    startAnimation();
+  }, { once: true });
 
   if (!reducedMotion) {
     window.addEventListener("resize", resizeCanvas, { passive: true });

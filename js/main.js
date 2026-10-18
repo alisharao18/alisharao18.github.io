@@ -216,7 +216,6 @@ const MANGA_TEXT = Object.freeze({
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isMobile = window.matchMedia("(max-width: 600px), (pointer: coarse)").matches;
-  const loader = document.querySelector(".loader");
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.querySelector(".main-nav");
   const progress = document.querySelector(".progress-line i");
@@ -476,12 +475,6 @@ const MANGA_TEXT = Object.freeze({
     });
   }
 
-  function hideLoader() {
-    if (!loader || loader.classList.contains("is-hidden")) return;
-    loader.classList.add("is-hidden");
-    window.setTimeout(() => loader.remove(), 650);
-  }
-
   function updateProgress(ratio) {
     const boundedRatio = Math.max(0, Math.min(1, ratio));
     topProgress.style.transform = `scaleX(${boundedRatio})`;
@@ -670,8 +663,6 @@ const MANGA_TEXT = Object.freeze({
     const letters = splitHeading(document.querySelector("[data-split]"));
     const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
     intro
-      .to(".loader-card", { autoAlpha: 0, y: -30, duration: 0.35, delay: 0.5 })
-      .set(loader, { display: "none" })
       .fromTo(".hero .chapter-kicker", { autoAlpha: 0, x: -22 }, { autoAlpha: 1, x: 0, duration: 0.5 })
       .fromTo(
         letters,
@@ -713,6 +704,7 @@ const MANGA_TEXT = Object.freeze({
       });
     });
   }
+  window.startPortfolioHeroEntrance = animateHero;
 
   function finishHeroImpact() {
     const impact = gsap.timeline();
@@ -1375,7 +1367,6 @@ const MANGA_TEXT = Object.freeze({
 
   function initScrollAnimations() {
     if (!window.gsap || !window.ScrollTrigger) {
-      hideLoader();
       setFinalCounters();
       showStaticStamps();
       initNativeChapterRail(chapterRail.chapters || []);
@@ -1386,14 +1377,12 @@ const MANGA_TEXT = Object.freeze({
     gsap.registerPlugin(ScrollTrigger);
     initScrollProgressTrigger(chapterRail.chapters || []);
     if (reduceMotion) {
-      hideLoader();
       setFinalCounters();
       showStaticStamps();
       gsap.set([".reveal-section", ".cutout"], { clearProps: "all" });
       return;
     }
 
-    animateHero();
     animateCounters();
     animatePanels();
     animateStamps();
@@ -1414,5 +1403,4 @@ const MANGA_TEXT = Object.freeze({
   window.addEventListener("load", () => {
     initScrollAnimations();
   }, { once: true });
-  window.setTimeout(hideLoader, 2300);
 })();

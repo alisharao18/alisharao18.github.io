@@ -13,7 +13,7 @@
       fallIntoStory: 1.1,
       skipFade: 0.3,
       reducedFade: 0.3,
-      safety: 8,
+      safety: 6,
     },
     text: {
       title: "THE CHRONICLES OF ALISHA",
@@ -143,7 +143,11 @@
     if (entranceStarted) return;
     entranceStarted = true;
     if (typeof window.startPortfolioHeroEntrance === "function") {
-      window.startPortfolioHeroEntrance();
+      try {
+        window.startPortfolioHeroEntrance();
+      } catch (error) {
+        console.error("The portfolio hero entrance failed to start.", error);
+      }
     } else {
       console.error("The portfolio hero entrance hook is unavailable.");
     }
@@ -157,6 +161,7 @@
     timeline = null;
     particleTweens.forEach((tween) => tween.kill());
     particleTweens.length = 0;
+    beginHeroEntrance();
     overlay.remove();
     document.querySelector(".book-intro-skip")?.remove();
     document.querySelector(".book-intro-sr")?.remove();
@@ -167,6 +172,7 @@
     if (brand instanceof HTMLElement) brand.focus({ preventScroll: true });
     if (previousTabIndex === null) document.body.removeAttribute("tabindex");
     else document.body.setAttribute("tabindex", previousTabIndex);
+    document.dispatchEvent(new Event("portfoliointrofinished"));
   }
 
   function skipIntro() {
@@ -176,12 +182,17 @@
     if (timeline) timeline.kill();
     timeline = null;
     if (gsap) {
-      gsap.to(overlay, {
-        opacity: 0,
-        duration: CONFIG.timing.skipFade,
-        ease: "power1.out",
-        onComplete: cleanAndClose,
-      });
+      try {
+        gsap.to(overlay, {
+          opacity: 0,
+          duration: CONFIG.timing.skipFade,
+          ease: "power1.out",
+          onComplete: cleanAndClose,
+        });
+      } catch (error) {
+        console.error("Could not fade the book intro while skipping.", error);
+        cleanAndClose();
+      }
     } else {
       cleanAndClose();
     }
@@ -283,7 +294,10 @@
 
   document.body.classList.add("book-intro-lock");
   document.body.setAttribute("tabindex", "-1");
-  safetyTimer = window.setTimeout(skipIntro, CONFIG.timing.safety * 1000);
+  safetyTimer = window.setTimeout(() => {
+    beginHeroEntrance();
+    cleanAndClose();
+  }, CONFIG.timing.safety * 1000);
 
   let elements;
   try {
@@ -305,8 +319,14 @@
 
   function startIntroWhenReady() {
     if (!active) return;
-    if (reducedMotion) playReducedIntro(elements);
-    else playIntro(elements);
+    try {
+      if (reducedMotion) playReducedIntro(elements);
+      else playIntro(elements);
+    } catch (error) {
+      console.error("Book intro animation failed.", error);
+      beginHeroEntrance();
+      cleanAndClose();
+    }
   }
 
   if (document.readyState === "complete") startIntroWhenReady();
