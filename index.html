@@ -16,17 +16,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script src="js/book-intro.js" defer></script>
+    <script src="js/hero-chain.js" defer></script>
+    <script src="js/kmeans-bg.js" defer></script>
   </head>
   <body>
-    <div class="loader" aria-label="Loading portfolio">
-      <div class="loader-card">
-        <span class="loader-chapter">A NEW STORY</span>
-        <span class="loader-title">CHAPTER<br />ONE</span>
-        <span class="loader-rule"></span>
-        <span class="loader-status">TURNING THE PAGE<span class="loader-dots">...</span></span>
-      </div>
-    </div>
-
+    <div class="book-intro-overlay" aria-hidden="true"></div>
+    <canvas id="kmeans-background" aria-hidden="true"></canvas>
     <div class="scroll-progress" aria-live="polite">
       <span class="progress-line"><i></i></span>
       <span class="page-counter">Page <b>01</b> / <span class="page-counter-total">11</span></span>
