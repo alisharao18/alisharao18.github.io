@@ -139,18 +139,6 @@ const SKILL_GROUPS = [
   { category: "Visualization & BI", skills: ["Power BI", "Tableau", "Streamlit", "DAX"] },
 ];
 
-// Editable words for the two looping manga banners.
-const MARQUEE_ROWS = [
-  {
-    direction: "left",
-    words: ["PYTHON", "SQL", "MACHINE LEARNING", "STATISTICS", "POWER BI", "STREAMLIT", "DATA ANALYTICS", "PLOT TWISTS"],
-  },
-  {
-    direction: "right",
-    words: ["DATA SCIENCE", "CHAPTER ???", "SPEED LINES", "MANHWA", "BADMINTON", "CASE CLOSED"],
-  },
-];
-
 const PAGE_COUNT = PROJECTS.length + 7;
 
 const BONUS_CHAPTER = Object.freeze({
@@ -216,11 +204,10 @@ const MANGA_TEXT = Object.freeze({
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isMobile = window.matchMedia("(max-width: 600px), (pointer: coarse)").matches;
+  const loader = document.querySelector(".loader");
   const menuButton = document.querySelector(".menu-toggle");
   const navigation = document.querySelector(".main-nav");
   const progress = document.querySelector(".progress-line i");
-  const topProgress = document.querySelector(".top-progress-fill");
-  const chapterRail = document.querySelector(".chapter-rail");
   const pageNumber = document.querySelector(".page-counter b");
   const cursorDot = document.querySelector(".cursor-dot");
   const cursorRing = document.querySelector(".cursor-ring");
@@ -371,90 +358,6 @@ const MANGA_TEXT = Object.freeze({
       `${PROJECTS.length} PROJECT${PROJECTS.length === 1 ? "" : "S"}, ZERO SKIPPED CUTSCENES`;
   }
 
-  function initMarquee() {
-    const marquee = document.querySelector("[data-skills-marquee]");
-    if (!marquee) return;
-
-    const accessibleWords = MARQUEE_ROWS.map((row) => row.words.join(", ")).join(". ");
-    marquee.append(createTextElement("p", "visually-hidden", accessibleWords));
-    MARQUEE_ROWS.forEach((row, rowIndex) => {
-      const marqueeRow = createTextElement("div", `marquee-row marquee-row-${rowIndex + 1}`);
-      marqueeRow.setAttribute("aria-hidden", "true");
-      const track = createTextElement("div", `marquee-track marquee-track-${row.direction}`);
-
-      for (let copyIndex = 0; copyIndex < 2; copyIndex += 1) {
-        const group = createTextElement("div", "marquee-group");
-        row.words.forEach((word, wordIndex) => {
-          group.append(createTextElement("span", "marquee-word", word));
-          if (wordIndex < row.words.length - 1) group.append(createTextElement("span", "marquee-symbol", "✦"));
-        });
-        track.append(group);
-      }
-      marqueeRow.append(track);
-      marquee.append(marqueeRow);
-    });
-  }
-
-  function initChapterRail() {
-    if (!chapterRail) return [];
-
-    const knownChapters = {
-      home: { name: "Hero", chapter: "Chapter 1: Hero" },
-      about: { name: "About", chapter: "Chapter 2: About" },
-      projects: { name: "Projects", chapter: "Chapter 3: Projects" },
-      interests: { name: "Interests", chapter: "Side Stories: Interests" },
-      contact: { name: "Contact", chapter: "Final Chapter: Contact" },
-    };
-    const chapters = [...document.querySelectorAll("main > .chapter")].map((element, index) => {
-      const known = knownChapters[element.id];
-      const title = element.querySelector("h1, h2")?.textContent.trim() || element.id;
-      return {
-        element,
-        name: known?.name || title,
-        chapter: known?.chapter || `Chapter ${index + 1}: ${title}`,
-      };
-    });
-    const bonusElement = document.querySelector("#bonus-chapter");
-    if (bonusElement) {
-      chapters.push({ element: bonusElement, name: "Bonus Chapter", chapter: "Bonus Chapter", locked: true });
-    }
-
-    chapterRail.replaceChildren();
-    chapters.forEach((chapter, index) => {
-      const button = document.createElement("button");
-      button.className = "chapter-rail-button";
-      if (chapter.locked) button.classList.add("is-locked");
-      button.type = "button";
-      button.setAttribute("aria-label", `Go to ${chapter.name}`);
-
-      const dot = document.createElement("span");
-      dot.className = "chapter-rail-dot";
-      if (chapter.locked) {
-        dot.innerHTML = '<svg viewBox="0 0 16 18" aria-hidden="true"><path d="M4 8V5a4 4 0 0 1 8 0v3M2 8h12v9H2z" /></svg>';
-      }
-
-      const label = createTextElement("span", "chapter-rail-label", chapter.chapter);
-      button.append(dot, label);
-      button.addEventListener("click", () => {
-        const top = chapter.element.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
-      });
-      chapterRail.append(button);
-      chapter.button = button;
-    });
-
-    const track = document.createElement("span");
-    track.className = "chapter-rail-track";
-    const fill = document.createElement("span");
-    fill.className = "chapter-rail-fill";
-    track.append(fill);
-    chapterRail.prepend(track);
-    chapterRail.chapters = chapters;
-    chapterRail.fill = fill;
-    setActiveChapter(0, chapters);
-    return chapters;
-  }
-
   function initNavigation() {
     const closeMenu = () => {
       menuButton.setAttribute("aria-expanded", "false");
@@ -475,70 +378,18 @@ const MANGA_TEXT = Object.freeze({
     });
   }
 
-  function updateProgress(ratio) {
-    const boundedRatio = Math.max(0, Math.min(1, ratio));
-    topProgress.style.transform = `scaleX(${boundedRatio})`;
-    progress.style.width = `${boundedRatio * 100}%`;
-    pageNumber.textContent = String(Math.min(PAGE_COUNT, Math.floor(boundedRatio * (PAGE_COUNT - 1)) + 1)).padStart(2, "0");
+  function hideLoader() {
+    if (!loader || loader.classList.contains("is-hidden")) return;
+    loader.classList.add("is-hidden");
+    window.setTimeout(() => loader.remove(), 650);
   }
 
   function initProgress() {
     const update = () => {
       const range = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = range > 0 ? Math.min(1, window.scrollY / range) : 0;
-      updateProgress(ratio);
-    };
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-  }
-
-  function initScrollProgressTrigger(chapters) {
-    ScrollTrigger.create({
-      start: 0,
-      end: "max",
-      onUpdate: (self) => {
-        gsap.set(topProgress, { scaleX: self.progress });
-        updateProgress(self.progress);
-        if (chapterRail.fill) gsap.set(chapterRail.fill, { scaleY: self.progress });
-      },
-      onRefresh: (self) => {
-        gsap.set(topProgress, { scaleX: self.progress });
-        updateProgress(self.progress);
-        if (chapterRail.fill) gsap.set(chapterRail.fill, { scaleY: self.progress });
-      },
-    });
-
-    chapters.forEach((chapter, index) => {
-      ScrollTrigger.create({
-        trigger: chapter.element,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => setActiveChapter(index, chapters),
-        onEnterBack: () => setActiveChapter(index, chapters),
-      });
-    });
-    ScrollTrigger.refresh();
-  }
-
-  function setActiveChapter(activeIndex, chapters) {
-    chapters.forEach((chapter, index) => {
-      chapter.button.classList.toggle("is-active", index === activeIndex);
-      chapter.button.setAttribute("aria-current", index === activeIndex ? "location" : "false");
-    });
-  }
-
-  function initNativeChapterRail(chapters) {
-    const update = () => {
-      const range = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = range > 0 ? Math.min(1, window.scrollY / range) : 0;
-      if (chapterRail.fill) chapterRail.fill.style.transform = `scaleY(${ratio})`;
-
-      let activeIndex = 0;
-      chapters.forEach((chapter, index) => {
-        if (chapter.element.getBoundingClientRect().top <= window.innerHeight / 2) activeIndex = index;
-      });
-      setActiveChapter(activeIndex, chapters);
+      progress.style.width = `${ratio * 100}%`;
+      pageNumber.textContent = String(Math.min(PAGE_COUNT, Math.floor(ratio * (PAGE_COUNT - 1)) + 1)).padStart(2, "0");
     };
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
@@ -663,6 +514,8 @@ const MANGA_TEXT = Object.freeze({
     const letters = splitHeading(document.querySelector("[data-split]"));
     const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
     intro
+      .to(".loader-card", { autoAlpha: 0, y: -30, duration: 0.35, delay: 0.5 })
+      .set(loader, { display: "none" })
       .fromTo(".hero .chapter-kicker", { autoAlpha: 0, x: -22 }, { autoAlpha: 1, x: 0, duration: 0.5 })
       .fromTo(
         letters,
@@ -704,7 +557,6 @@ const MANGA_TEXT = Object.freeze({
       });
     });
   }
-  window.startPortfolioHeroEntrance = animateHero;
 
   function finishHeroImpact() {
     const impact = gsap.timeline();
@@ -1289,59 +1141,6 @@ const MANGA_TEXT = Object.freeze({
     });
   }
 
-  function initCursorGlow() {
-    if (reduceMotion || !window.gsap) return;
-
-    const desktopPointer = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 900px)");
-    let glowLayer = null;
-    let glow = null;
-    let moveHandler = null;
-    let moveX = null;
-    let moveY = null;
-
-    const disable = () => {
-      if (!glowLayer) return;
-      window.removeEventListener("mousemove", moveHandler);
-      moveX.tween.kill();
-      moveY.tween.kill();
-      glowLayer.remove();
-      glowLayer = null;
-      glow = null;
-      moveHandler = null;
-      moveX = null;
-      moveY = null;
-    };
-
-    const enable = () => {
-      if (glowLayer) return;
-
-      glowLayer = document.createElement("div");
-      glowLayer.className = "cursor-glow-layer";
-      glowLayer.setAttribute("aria-hidden", "true");
-      glow = document.createElement("span");
-      glow.className = "cursor-glow";
-      glowLayer.append(glow);
-      document.body.append(glowLayer);
-
-      gsap.set(glow, { xPercent: -50, yPercent: -50, x: -1000, y: -1000 });
-      moveX = gsap.quickTo(glow, "x", { duration: 0.6, ease: "power3.out" });
-      moveY = gsap.quickTo(glow, "y", { duration: 0.6, ease: "power3.out" });
-      moveHandler = (event) => {
-        moveX(event.clientX);
-        moveY(event.clientY);
-      };
-      window.addEventListener("mousemove", moveHandler, { passive: true });
-    };
-
-    const syncPointerMode = () => {
-      if (desktopPointer.matches) enable();
-      else disable();
-    };
-
-    syncPointerMode();
-    desktopPointer.addEventListener("change", syncPointerMode);
-  }
-
   function initSoundEffects() {
     gsap.utils.toArray(".chapter:not(.hero)").forEach((chapter, index) => {
       ScrollTrigger.create({
@@ -1367,40 +1166,45 @@ const MANGA_TEXT = Object.freeze({
 
   function initScrollAnimations() {
     if (!window.gsap || !window.ScrollTrigger) {
+      hideLoader();
       setFinalCounters();
       showStaticStamps();
-      initNativeChapterRail(chapterRail.chapters || []);
       document.querySelectorAll(".reveal-section").forEach((section) => section.classList.add("fallback-visible"));
       return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
-    initScrollProgressTrigger(chapterRail.chapters || []);
     if (reduceMotion) {
+      hideLoader();
       setFinalCounters();
       showStaticStamps();
       gsap.set([".reveal-section", ".cutout"], { clearProps: "all" });
       return;
     }
 
+    animateHero();
     animateCounters();
     animatePanels();
     animateStamps();
     animateSections();
     initParallax();
     initCursor();
-    initCursorGlow();
     initSoundEffects();
   }
 
   initNavigation();
-  initMarquee();
-  initChapterRail();
   initProgress();
   initThemeToggle();
   initSecretChapter();
   initClickEffects();
   window.addEventListener("load", () => {
+    if (reduceMotion) {
+      hideLoader();
+      setFinalCounters();
+      showStaticStamps();
+      return;
+    }
     initScrollAnimations();
   }, { once: true });
+  window.setTimeout(hideLoader, 2300);
 })();

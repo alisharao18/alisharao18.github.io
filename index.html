@@ -16,19 +16,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script src="js/book-intro.js" defer></script>
-    <script src="js/kmeans-bg.js" defer></script>
-    <script src="js/hero-chain.js" defer></script>
   </head>
   <body>
-    <div class="book-intro-overlay" aria-hidden="true"></div>
-    <canvas id="kmeans-background" aria-hidden="true"></canvas>
+    <div class="loader" aria-label="Loading portfolio">
+      <div class="loader-card">
+        <span class="loader-chapter">A NEW STORY</span>
+        <span class="loader-title">CHAPTER<br />ONE</span>
+        <span class="loader-rule"></span>
+        <span class="loader-status">TURNING THE PAGE<span class="loader-dots">...</span></span>
+      </div>
+    </div>
+
     <div class="scroll-progress" aria-live="polite">
       <span class="progress-line"><i></i></span>
       <span class="page-counter">Page <b>01</b> / <span class="page-counter-total">11</span></span>
     </div>
-    <div class="top-progress" aria-hidden="true"><span class="top-progress-fill"></span></div>
-    <nav class="chapter-rail" aria-label="Chapter navigation"></nav>
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
     <div class="sound-effect" aria-hidden="true">WHOOSH</div>
@@ -159,7 +161,7 @@
           <h1 id="hero-title" class="display-title" data-split aria-label="ALISHA">ALISHA</h1>
           <span class="hero-wham" aria-hidden="true">WHAM!</span>
           <p class="hero-tagline">Data science, with a plot twist.</p>
-          <p class="hero-description">Fifth-year data science student.<br />Collector of questions with inconveniently interesting answers.</p>
+          <p class="hero-description">Third-year data science student.<br />Collector of questions with inconveniently interesting answers.</p>
           <a class="comic-button" href="#about">Start reading <span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-cutouts" aria-label="A few things Alisha enjoys">
@@ -173,8 +175,6 @@
         <span class="hero-sfx" aria-hidden="true">FWIP!</span>
         <div class="hero-footer"><span>SCROLL TO CONTINUE</span><span>01 — <span class="hero-page-total">11</span></span></div>
       </section>
-
-      <div class="skills-marquee" data-skills-marquee></div>
 
       <section class="chapter about chapter-pad" id="about" aria-labelledby="about-title">
         <div class="chapter-heading">
@@ -190,7 +190,7 @@
           <div class="about-story">
             <span class="panel-label">MEANWHILE, AT UNIVERSITY...</span>
             <div class="speech-bubble">
-              <p>Fifth-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I like turning data into things people can actually use.</p>
+              <p>Third-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I like turning data into things people can actually use.</p>
               <span class="bubble-tail" aria-hidden="true"></span>
             </div>
             <div class="cgpa-card">
@@ -242,7 +242,7 @@
           <div class="contact-details"><p>Have a good idea, an interesting question, or an excellent series recommendation? My inbox is open.</p><a href="mailto:alisha.s.rao@gmail.com">alisha.s.rao@gmail.com <span aria-hidden="true">↗</span></a><a href="https://github.com/alisharao18" target="_blank" rel="noreferrer">github.com/alisharao18 <span aria-hidden="true">↗</span></a></div>
         </div>
         <p class="to-be-continued">TO BE CONTINUED<span>...</span></p>
-        <section class="bonus-chapter comic-panel" id="bonus-chapter" aria-labelledby="bonus-title">
+        <section class="bonus-chapter comic-panel" aria-labelledby="bonus-title">
           <div class="bonus-heading">
             <div>
               <p class="bonus-kicker">BONUS CHAPTER · SEALED</p>

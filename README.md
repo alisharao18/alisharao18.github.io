@@ -1,74 +1,25 @@
-# Alisha Rao | Portfolio
+# Alisha Rao — Webtoon Portfolio
 
-**Live site:** https://alisharao18.github.io
+A responsive, single-page portfolio told as a dark, vertical-scroll webtoon. Built with plain HTML, CSS, and JavaScript; GSAP and ScrollTrigger are loaded from cdnjs.
 
-A personal portfolio designed like a manhwa (webtoon) you scroll through. Every section is a chapter, projects are comic panels, and there is one secret chapter for curious visitors.
+## Run locally
 
-## About me
+Open `index.html` in a browser, or serve this folder with any static HTTP server. There is no build step or package installation.
 
-I am a fifth-year B.Tech Data Science (Integrated) student at NMIMS MPSTME, Mumbai. I work with Python, SQL, machine learning and statistics, and I like turning messy data into dashboards and models people can actually use.
+## Deploy to GitHub Pages
 
-## Features
+Push this folder's contents to a GitHub repository, then open **Settings → Pages**. Choose **Deploy from a branch**, select the branch and `/ (root)` folder, and save. The site uses relative asset paths and is ready for static hosting.
 
-- Webtoon-style vertical scroll with chapters, comic panels, halftone textures, speech bubbles and sound-effect text
-- Dark mode by default, with a dark/light toggle
-- Hero with animated name letters and floating cutout icons
-- Animated CGPA counter and grouped skill badges
-- Twin animated skills marquees, with reduced-motion support
-- Project chapters with generated SVG covers
-- "Side stories" section for hobbies and interests
-- Click bursts (POW, BAM), custom cursor, and a page counter that tracks scroll progress
-- Fixed top progress bar and chapter navigation rail for desktop
-- A hidden bonus chapter. Find the way in and see what happens.
-- Fully responsive, tested on phones
+## Replace these placeholders
 
+- `assets/alisha.jpg` — portrait photo for the About panel.
+- `assets/cutouts/badminton-racket.png`
+- `assets/cutouts/shuttlecock.png`
+- `assets/cutouts/headphones.png`
+- `assets/cutouts/manhwa-volume.png`
+- `assets/cutouts/camera.png`
+- `assets/cutouts/food.png`
+- Replace the five `REPLACE-WITH-...-REPO` GitHub links in `index.html` with the project repository URLs.
+- Replace each `[PLACEHOLDER RESULT]` in the project panels with a verified result and update that counter's `data-target` (and `data-decimals` if needed) in `index.html`.
 
-## Built with
-
-- HTML, CSS and vanilla JavaScript (no frameworks, no build step)
-- [GSAP](https://gsap.com/) and ScrollTrigger for animation
-- Google Fonts (Anton, Inter)
-- Written with help from GitHub Copilot in VS Code
-
-## Project structure
-
-```
-alisharao18.github.io/
-  index.html
-  css/
-    style.css
-  js/
-    main.js
-  assets/
-    alisha.jpg
-    cutouts/
-  README.md
-```
-
-## Run it locally
-
-1. Clone the repo:
-   ```
-   git clone https://github.com/alisharao18/alisharao18.github.io.git
-   ```
-2. Open the folder in VS Code.
-3. Right-click `index.html` and choose **Open with Live Server**, or simply double-click `index.html` to open it in your browser.
-
-No installs needed.
-
-## Adding a project
-
-Projects live in the `PROJECTS` array at the top of `js/main.js`. Copy an existing entry, then change its title, description, links, `coverIcon`, `coverAccent` and `coverLabel`. Chapter numbers and the page count update on their own.
-
-## Deployment
-
-Hosted for free on GitHub Pages from the `main` branch (root folder). Every push to `main` updates the live site within a minute or two.
-
-## Contact
-
-- Email: alisha.s.rao@gmail.com
-- GitHub: [github.com/alisharao18](https://github.com/alisharao18)
-
-## License
-
-Code is free to read and learn from. Please do not copy the design or content as your own portfolio.
+The included cutout PNGs and portrait are clearly marked visual placeholders and can be overwritten with your own images using the same filenames.
